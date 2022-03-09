@@ -10,25 +10,25 @@ import pyaudio
 
 
 def audio_record(command_file, rec_time):
-    CHUNK = 1024
-    FORMAT = pyaudio.paInt16  # 16bit 位深
-    CHANNELS = 1  # 单声道
-    RATE = 16000  # 采样频率
+    chunk = 1024
+    format = pyaudio.paInt16  # 16bit 位深
+    channels = 1  # 单声道
+    rate = 16000  # 采样频率
 
     p = pyaudio.PyAudio()
 
     # 创建音频流
     stream = p.open(
-        frames_per_buffer=CHUNK,
-        format=FORMAT,
-        channels=CHANNELS,
-        rate=RATE
+        frames_per_buffer=chunk,
+        format=format,
+        channels=channels,
+        rate=rate
     )
 
     frames = []
     # 录制音频数据
-    for i in range(0, int(RATE // CHUNK * rec_time)):
-        data = stream.read(CHUNK)
+    for i in range(0, int(rate // chunk * rec_time)):
+        data = stream.read(chunk)
         frames.append(data)
 
     # 结束录制
@@ -38,9 +38,9 @@ def audio_record(command_file, rec_time):
 
     # save
     wf = wave.open(command_file, 'wb')
-    wf.setnchannels(CHANNELS)
-    wf.setsampwidth(p.get_sample_size(FORMAT))
-    wf.setframerate(RATE)
+    wf.setnchannels(channels)
+    wf.setsampwidth(p.get_sample_size(format))
+    wf.setframerate(rate)
     wf.writeframes(b''.join(frames))
     wf.close()
 
