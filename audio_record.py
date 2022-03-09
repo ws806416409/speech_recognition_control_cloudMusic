@@ -22,8 +22,11 @@ def audio_record(command_file, rec_time):
         frames_per_buffer=chunk,
         format=format,
         channels=channels,
-        rate=rate
+        rate=rate,
+        input=True
     )
+
+    print("Start Recording...")
 
     frames = []
     # 录制音频数据
@@ -35,6 +38,7 @@ def audio_record(command_file, rec_time):
     stream.stop_stream()
     stream.close()
     p.terminate()
+    print("Recording Done...")
 
     # save
     wf = wave.open(command_file, 'wb')
