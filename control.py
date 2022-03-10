@@ -6,10 +6,23 @@
 @Annotation : " "
 """
 from audio_record import audio_record
+from wyy_controller import play_song
+from wyy_controller import pause
+
+pauseCommands = ["暂停", "停止", "取消"]
 
 
 def command_analyse(text):
-    pass
+    for command in pauseCommands:
+        if command in text:
+            pause()
+            return
+    idx = text.find("播放")
+    if idx != -1:
+        idx += 2
+        order = text[idx:idx + 3]
+        play_song(order)
+
 
 
 def start():

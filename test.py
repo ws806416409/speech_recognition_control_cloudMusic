@@ -15,4 +15,10 @@ def word_count():
 
 
 if __name__ == '__main__':
-    word_count()
+    #word_count()
+    text = "播放下一首"
+    idx = text.find("播放")
+    order = text[idx+2:idx+5]
+
+    print(order)
+
