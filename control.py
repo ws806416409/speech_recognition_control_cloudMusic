@@ -8,6 +8,10 @@
 from audio_record import audio_record
 
 
+def command_analyse(text):
+    pass
+
+
 def start():
     while True:
         print("================================")
@@ -19,6 +23,7 @@ def start():
         asr_result = audio_discern(audio_path)
         print(asr_result)
         command_text = asr_result['result'][0]
+        command_analyse(command_text)
 
 
 if __name__ == '__main__':
