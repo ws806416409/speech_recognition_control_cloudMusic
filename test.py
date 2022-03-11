@@ -5,8 +5,15 @@
 @Blog       ：https://lemonws.top
 @Annotation : "test sth"
 """
-import win32gui
+from pymouse import PyMouse
 from pykeyboard import PyKeyboard
+import time
+import pyperclip
+import utils
+
+
+ms = PyMouse()
+kb = PyKeyboard()
 
 
 def word_count():
@@ -17,4 +24,13 @@ def word_count():
 
 
 if __name__ == '__main__':
-    test = []
+    time.sleep(1)
+    ms.click(450, 30, 1)
+    # kb.type_string("Hotel California")
+    pyperclip.copy("渡口")
+    kb.press_key(kb.control_key)
+    kb.tap_key('v')
+    kb.release_key(kb.control_key)
+    kb.tap_key(kb.enter_key)
+    time.sleep(2)
+    utils.mouse_click('play_all.png')

@@ -3,7 +3,7 @@
 @File       ：control.py 
 @Author     ：DizzyLime 
 @Blog       ：https://lemonws.top
-@Annotation : " "
+@Annotation : "指令分发"
 """
 import sys
 import time
@@ -48,4 +48,5 @@ def start():
 
 
 if __name__ == '__main__':
+    time.sleep(1)
     start()
