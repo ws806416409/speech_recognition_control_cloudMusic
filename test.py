@@ -16,8 +16,5 @@ def word_count():
         print(len(words))
 
 
-
 if __name__ == '__main__':
-    name = "NetEase Cloud Music (32 位)"
-    handle = win32gui.FindWindow(None, name)
-    win32gui.SetForegroundWindow(handle)
+    test = []
