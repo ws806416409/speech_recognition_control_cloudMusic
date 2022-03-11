@@ -16,12 +16,12 @@ ms = PyMouse()
 kb = PyKeyboard()
 
 
-def find_song(songName):
+def find_song(song_name):
     # size = ms.screen_size()
     # kb.type_string("渡口") 无法输出中文 换方法
     ms.click(450, 30, 1)
     # kb.type_string("Hotel California")
-    pyperclip.copy("渡口")
+    pyperclip.copy(song_name)
     # 模拟粘贴 + 回车 搜索歌曲
     kb.press_key(kb.control_key)
     kb.tap_key('v')
@@ -33,7 +33,7 @@ def find_song(songName):
 
 # 点击播放全部
 def play_all():
-    utils.mouse_click('static/play_all.png')
+    utils.mouse_click('play_all.png')
 
 
 # 暂停 or 恢复播放
@@ -57,5 +57,5 @@ def play_song(idx, text):
     elif text == "播放全部":
         play_all()
     else:
-        songName = text[idx:]
-        find_song(songName)
+        song_name = text[idx:]
+        find_song(song_name)
