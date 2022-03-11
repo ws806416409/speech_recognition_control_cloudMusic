@@ -5,6 +5,8 @@
 @Blog       ：https://lemonws.top
 @Annotation : "test sth"
 """
+import win32gui
+from pykeyboard import PyKeyboard
 
 
 def word_count():
@@ -14,11 +16,8 @@ def word_count():
         print(len(words))
 
 
+
 if __name__ == '__main__':
-    #word_count()
-    text = "播放下一首"
-    idx = text.find("播放")
-    order = text[idx+2:idx+5]
-
-    print(order)
-
+    name = "NetEase Cloud Music (32 位)"
+    handle = win32gui.FindWindow(None, name)
+    win32gui.SetForegroundWindow(handle)
