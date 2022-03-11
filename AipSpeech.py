@@ -9,9 +9,9 @@ from aip import AipSpeech
 
 
 def audio_discern(audio_path, audio_type="wav"):
-    APP_ID = '25732499'
-    API_KEY = 'KrnbYWWoZTf40x4HeKExwDWA'
-    SECRET_KEY = 'euhcoLMOlT64WQcEHGInPWQjfbq4gtj6'
+    APP_ID = 'xxxx'
+    API_KEY = 'xxxxxx'
+    SECRET_KEY = 'xxxxxxx'
 
     client = AipSpeech(APP_ID, API_KEY, SECRET_KEY)
 
