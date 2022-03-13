@@ -60,3 +60,13 @@ def play_song(idx, text):
     else:
         song_name = text[idx:]
         find_songs(song_name)
+
+
+# 网易云基础设置
+def set_wyy(command):
+    if command in ['放大', '缩小']:
+        pass
+    elif command == '关闭':
+        pass
+    elif command == '最小化':
+        pass

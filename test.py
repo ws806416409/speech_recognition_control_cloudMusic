@@ -34,10 +34,14 @@ if __name__ == '__main__':
     kb.tap_key(kb.enter_key)
     time.sleep(2)
     utils.mouse_click('play_all.png')
-    '''
     matchSinger = re.match(r'(.*播放|.*听)?(.+)的歌(.*)', '播放渡口', re.I)
     if matchSinger:
         print("match success", matchSinger.group(2))
         print(matchSinger.group(1))
+    else:
+        print("false")
+    '''
+    if '缩小' == '放大' or '缩小':
+        print("yes")
     else:
         print("false")

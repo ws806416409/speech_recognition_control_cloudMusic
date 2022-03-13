@@ -9,15 +9,14 @@ import sys
 import time
 from audio_record import audio_record
 from AipSpeech import audio_discern
-from wyy_controller import play_song, find_songs, pause
+from wyy_controller import play_song, find_songs, pause, set_wyy
 import re
 
-
 pauseCommands = ["暂停", "停止", "取消"]
+normalCommands = ['放大', '缩小', '关闭', '最小化']
 
 
 def command_analyse(text):
-
     # 歌手匹配 按歌手名搜索歌曲的可能
     match_obj = re.match(r'(.*播放|.*听)?(.+)的歌(.*)', '我要听陈奕迅的歌曲', re.I)
     if match_obj:
@@ -37,6 +36,9 @@ def command_analyse(text):
             pause()
         idx += 2
         play_song(idx, text)
+
+    if text in normalCommands:
+        set_wyy(text)
 
 
 def start():
