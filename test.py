@@ -10,6 +10,7 @@ from pykeyboard import PyKeyboard
 import time
 import pyperclip
 import utils
+import re
 
 
 ms = PyMouse()
@@ -24,9 +25,8 @@ def word_count():
 
 
 if __name__ == '__main__':
-    time.sleep(1)
-    ms.click(450, 30, 1)
     # kb.type_string("Hotel California")
+    '''
     pyperclip.copy("渡口")
     kb.press_key(kb.control_key)
     kb.tap_key('v')
@@ -34,3 +34,10 @@ if __name__ == '__main__':
     kb.tap_key(kb.enter_key)
     time.sleep(2)
     utils.mouse_click('play_all.png')
+    '''
+    matchSinger = re.match(r'(.*播放|.*听)?(.+)的歌(.*)', '播放渡口', re.I)
+    if matchSinger:
+        print("match success", matchSinger.group(2))
+        print(matchSinger.group(1))
+    else:
+        print("false")
