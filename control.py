@@ -17,16 +17,19 @@ pauseCommands = ["暂停", "停止", "取消"]
 
 
 def command_analyse(text):
+
     # 歌手匹配 按歌手名搜索歌曲的可能
     match_obj = re.match(r'(.*播放|.*听)?(.+)的歌(.*)', '我要听陈奕迅的歌曲', re.I)
     if match_obj:
         singer = match_obj.group(2)
         find_songs(singer)
+
     # 暂停歌曲的指令判断
     for command in pauseCommands:
         if command in text:
             pause()
             return
+
     # 播放 or 切歌
     idx = text.find("播放")
     if idx != -1:
