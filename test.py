@@ -7,6 +7,7 @@
 """
 from pymouse import PyMouse
 from pykeyboard import PyKeyboard
+import pyautogui
 import time
 import pyperclip
 import utils
@@ -41,7 +42,6 @@ if __name__ == '__main__':
     else:
         print("false")
     '''
-    if '缩小' == '放大' or '缩小':
-        print("yes")
-    else:
-        print("false")
+    pyautogui.alert(text='', title='', button='OK')
+    b = pyautogui.alert(text='要开始程序么？', title='请求框', button='OK')
+    print(b)  # 输出结果为OK

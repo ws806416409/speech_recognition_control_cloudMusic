@@ -7,6 +7,7 @@
 """
 import sys
 import time
+import utils
 from audio_record import audio_record
 from AipSpeech import audio_discern
 from wyy_controller import play_song, find_songs, pause, set_wyy
@@ -14,6 +15,7 @@ import re
 
 pauseCommands = ["暂停", "停止", "取消"]
 normalCommands = ['放大', '缩小', '关闭', '最小化']
+mouseCommands = {'向上': 5, '向下': -5}
 
 
 def command_analyse(text):
@@ -28,6 +30,11 @@ def command_analyse(text):
         if command in text:
             pause()
             return
+
+    # 控制鼠标滑轮的滑动
+    for command in mouseCommands:
+        if text.find(command) != -1:
+            utils.mouse_scroll(mouseCommands[command])
 
     # 播放 or 切歌
     idx = text.find("播放")
