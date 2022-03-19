@@ -10,7 +10,7 @@ import time
 import utils
 from audio_record import audio_record
 from AipSpeech import audio_discern
-from wyy_controller import play_song, find_songs, pause, set_wyy
+from wyyController import play_song, find_songs, pause, set_wyy, play_fm, check_wyy
 import re
 
 pauseCommands = ["暂停", "停止", "取消"]
@@ -20,10 +20,11 @@ mouseCommands = {'向上': 5, '向下': -5}
 
 def command_analyse(text):
     # 歌手匹配 按歌手名搜索歌曲的可能
-    match_obj = re.match(r'(.*播放|.*听)?(.+)的歌(.*)', '我要听陈奕迅的歌曲', re.I)
+    match_obj = re.match(r'(.*播放|.*听)?(.+)的歌(.*)', text, re.I)
     if match_obj:
         singer = match_obj.group(2)
         find_songs(singer)
+        return
 
     # 暂停歌曲的指令判断
     for command in pauseCommands:
@@ -41,19 +42,35 @@ def command_analyse(text):
     if idx != -1:
         if len(text) == 2:
             pause()
-        idx += 2
-        play_song(idx, text)
+        else:
+            idx += 2
+            play_song(idx, text)
+        return
 
     if text in normalCommands:
         set_wyy(text)
+        return
+
+    if '私人FM' in text:
+        play_fm()
+        return
+
+    elif '查看' in text:
+        check_wyy(text)
+        return
 
 
 def start():
+    sec = 3
     while True:
+        if sec > 8:
+            # 如果等待时间过长 则停止程序
+            print('SORRY, WAIT TOO LONG TIME!')
+            sys.exit(0)
         print("================================")
         print("请在三秒内说出指令:")
         audio_path = "./audio/test_audio.wav"
-        audio_record(audio_path, 3)
+        audio_record(audio_path, sec)
         print("正在识别")
         asr_result = audio_discern(audio_path)
         time.sleep(1)
@@ -65,6 +82,7 @@ def start():
             command_analyse(command_text)
         except KeyError:
             print("没听请, 请您再说一次")
+            sec += 1
 
 
 if __name__ == '__main__':

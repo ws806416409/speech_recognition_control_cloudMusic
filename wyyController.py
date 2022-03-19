@@ -1,6 +1,6 @@
 """
 @Time       ：2022/3/10 22:58 
-@File       ：wyy_controller.py
+@File       ：wyyController.py
 @Author     ：DizzyLime 
 @Blog       ：https://lemonws.top
 @Annotation : "网易云音乐后端操控接口"
@@ -10,7 +10,9 @@ import utils
 import pyperclip
 from pymouse import PyMouse
 from pykeyboard import PyKeyboard
+import re
 
+import wyySpider
 
 ms = PyMouse()
 kb = PyKeyboard()
@@ -70,3 +72,22 @@ def set_wyy(command):
         pass
     elif command == '最小化':
         pass
+
+
+def play_fm():
+    utils.mouse_click('static/FM.png')
+
+
+def check_wyy(text):
+    # 复制歌曲链接
+    ms.click(40, 1400, 1)
+    time.sleep(1)
+    utils.mouse_click('share.png')
+    time.sleep(0.5)
+    utils.mouse_click('link.png')
+    # 提取歌曲sid(song_id)
+    content = pyperclip.paste()
+    print(content)
+    sid = re.search(r'(song\?id=)(\d+)', content).group(2)
+    # 爬虫 将信息写入文件
+    # wyySpider.main(sid)

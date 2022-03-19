@@ -13,6 +13,7 @@ import pyperclip
 import utils
 import re
 
+import wyySpider
 
 ms = PyMouse()
 kb = PyKeyboard()
@@ -42,6 +43,4 @@ if __name__ == '__main__':
     else:
         print("false")
     '''
-    pyautogui.alert(text='', title='', button='OK')
-    b = pyautogui.alert(text='要开始程序么？', title='请求框', button='OK')
-    print(b)  # 输出结果为OK
+    wyySpider.main(1901371647)
