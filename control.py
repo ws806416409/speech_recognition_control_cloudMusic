@@ -82,7 +82,7 @@ def start():
             command_analyse(command_text)
         except KeyError:
             print("没听请, 请您再说一次")
-            sec += 1
+            sec += 2
 
 
 if __name__ == '__main__':

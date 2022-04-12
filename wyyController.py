@@ -83,11 +83,16 @@ def check_wyy(text):
     ms.click(40, 1400, 1)
     time.sleep(1)
     utils.mouse_click('share.png')
-    time.sleep(0.5)
+    time.sleep(0.7)
     utils.mouse_click('link.png')
     # 提取歌曲sid(song_id)
     content = pyperclip.paste()
     print(content)
     sid = re.search(r'(song\?id=)(\d+)', content).group(2)
     # 爬虫 将信息写入文件
-    # wyySpider.main(sid)
+    wyySpider.main(sid)
+    # 爬虫数据中 0是未知 1是男 2是女
+    if '性别比例' in text:
+        pass
+
+

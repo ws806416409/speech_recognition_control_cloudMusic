@@ -7,6 +7,7 @@
 """
 from pymouse import PyMouse
 from pykeyboard import PyKeyboard
+from db import Db
 import pyautogui
 import time
 import pyperclip
@@ -43,4 +44,7 @@ if __name__ == '__main__':
     else:
         print("false")
     '''
-    wyySpider.main(1901371647)
+    db = Db()
+    if db.insert_info(1, 18, 1, 105, "test"):
+        print("test success")
+
