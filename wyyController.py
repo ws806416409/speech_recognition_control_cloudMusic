@@ -10,9 +10,12 @@ import utils
 import pyperclip
 from pymouse import PyMouse
 from pykeyboard import PyKeyboard
+from pyecharts import Pie
+from PIL import Image
 import re
 
 import wyySpider
+from db import Db
 
 ms = PyMouse()
 kb = PyKeyboard()
@@ -30,7 +33,7 @@ def find_songs(param):
     kb.tap_key('v')
     kb.release_key(kb.control_key)
     kb.tap_key(kb.enter_key)
-    time.sleep(1)
+    time.sleep(2)
     play_all()
 
 
@@ -64,6 +67,12 @@ def play_song(idx, text):
         find_songs(song_name)
 
 
+def add_like():
+    kb.press_key(kb.control_key)
+    kb.tap_key('l')
+    kb.release_key(kb.control_key)
+
+
 # 网易云基础设置
 def set_wyy(command):
     if command in ['放大', '缩小']:
@@ -78,7 +87,7 @@ def play_fm():
     utils.mouse_click('static/FM.png')
 
 
-def check_wyy(text):
+def check_wyy(text):    
     # 复制歌曲链接
     ms.click(40, 1400, 1)
     time.sleep(1)
@@ -91,8 +100,34 @@ def check_wyy(text):
     sid = re.search(r'(song\?id=)(\d+)', content).group(2)
     # 爬虫 将信息写入文件
     wyySpider.main(sid)
+    db = Db()
     # 爬虫数据中 0是未知 1是男 2是女
     if '性别比例' in text:
-        pass
+        unknown = 0
+        male = 0
+        female = 0
+        gender_list = db.list("gender")
+        for gender in gender_list:
+            if gender == 0:
+                unknown += 1
+            elif gender == 1:
+                male += 1
+            else:
+                female += 1
+        attr = ["未知", "男", "女"]
+        v1 = [unknown, male, female]
+        pie = Pie("性别比例饼图")
+        pie.add(
+            "",
+            attr,
+            v1,
+            is_label_show=True,
+            is_more_utils=True
+        )
+        path = 'E:\\speech_recognition_control_cloudMusic\\imgs\\' + str(sid) + '性别比例.jpeg'
+        pie.render(path=path)
+        image = Image.open(path)
+        image.show()
+
 
 

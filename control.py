@@ -10,7 +10,7 @@ import time
 import utils
 from audio_record import audio_record
 from AipSpeech import audio_discern
-from wyyController import play_song, find_songs, pause, set_wyy, play_fm, check_wyy
+from wyyController import play_song, find_songs, pause, set_wyy, play_fm, check_wyy, add_like
 import re
 
 pauseCommands = ["暂停", "停止", "取消"]
@@ -59,16 +59,20 @@ def command_analyse(text):
         check_wyy(text)
         return
 
+    elif '收藏' in text or '我喜欢' in text:
+        add_like()
+        return
+
 
 def start():
-    sec = 3
+    sec = 4
     while True:
         if sec > 8:
             # 如果等待时间过长 则停止程序
             print('SORRY, WAIT TOO LONG TIME!')
             sys.exit(0)
         print("================================")
-        print("请在三秒内说出指令:")
+        print("请在四秒内说出指令:")
         audio_path = "./audio/test_audio.wav"
         audio_record(audio_path, sec)
         print("正在识别")

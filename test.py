@@ -7,13 +7,18 @@
 """
 from pymouse import PyMouse
 from pykeyboard import PyKeyboard
+from PIL import Image
+import pyecharts_snapshot
+import snapshot_phantomjs
 from db import Db
 import pyautogui
 import time
 import pyperclip
 import utils
 import re
-
+import pandas as pd
+import numpy as np
+from pyecharts import Pie, configure
 import wyySpider
 
 ms = PyMouse()
@@ -44,7 +49,18 @@ if __name__ == '__main__':
     else:
         print("false")
     '''
-    db = Db()
-    if db.insert_info(1, 18, 1, 105, "test"):
-        print("test success")
 
+    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+    v1 = [11, 12, 13, 10, 10, 10]
+    pie = Pie("饼图示例")
+    pie.add(
+        "",
+        attr,
+        v1,
+        is_label_show=True,
+        is_more_utils=True
+    )
+    path = 'E:\\speech_recognition_control_cloudMusic\\imgs\\饼图.jpeg'
+    # pie.render(path=path)
+    image = Image.open(r'E:\\speech_recognition_control_cloudMusic\\imgs\\test.jpg')
+    image.show()

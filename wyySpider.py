@@ -7,6 +7,7 @@
 """
 import json
 import requests
+from db import Db
 
 global song
 
@@ -48,6 +49,7 @@ def get_user(user_id):
 
 
 def get_comment(sid, page):
+    db = Db()
     url = 'http://music.163.com/api/v1/resource/comments/R_SO_4_' + str(sid) + '?limit=20&offset=' + str(page)
     response = requests.get(url, headers)
     result = response.json()
@@ -59,11 +61,11 @@ def get_comment(sid, page):
         user_age = str(user_msg['age'])
         user_gender = str(user_msg['gender'])
         user_city = str(user_msg['city'])
-
-        with open('music_comments.csv', 'a', encoding='utf-8-sig') as f:
-            f.write(
-                user_id + ',' + user_age + ',' + user_gender + ',' + user_city + ',' + comment + '\n')
-        f.close()
+        db.insert_info(user_id, user_age, user_gender, user_city, comment)
+        # with open('music_comments.csv', 'a', encoding='utf-8-sig') as f:
+        #     f.write(
+        #         user_id + ',' + user_age + ',' + user_gender + ',' + user_city + ',' + comment + '\n')
+        # f.close()
 
 
 def main(sid):

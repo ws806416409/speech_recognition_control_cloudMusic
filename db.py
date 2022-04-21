@@ -36,3 +36,9 @@ class Db:
             return 1
         else:
             return -1
+
+    def list(self, param):
+        cursor = self.mdb.cursor()
+        sql = "SELECT %s from music_comment" % param
+        res = cursor.execute(sql)
+        return res
